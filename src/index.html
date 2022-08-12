@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style> 
+            * { 
+                padding: 0; 
+                margin: 0; 
+                font-weight: bold;
+                font-family: sans-serif;
+                /* outline: 1px solid red;  */
+            } 
+
+            body { background-color: #202124; } 
+
+            button { 
+                background-color: #454140; 
+                color: white; 
+                cursor: pointer; 
+                border: none; 
+                border-radius: 4px;
+            }
+
+            button:focus {
+                outline:0;
+            }
+
+            #device_container {
+                width: 100%;
+                height: 1000px;
+                display: flex;
+                justify-content: center;
+                margin-top: 50px;
+            }
+
+            #device_shell {
+                background-color: #142495;
+                padding: 35px 35px 75px;   
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                border-bottom-left-radius: 35px;
+                border-bottom-right-radius: 35px;
+            }
+
+            #device_screen {
+                /* background-color: #080808;  */
+                height: 500px; 
+                width: 500px;
+                border-radius: 3px;
+            }
+
+            #directional_buttons_container {
+                margin: 65px 0 0 15px;
+                width: 155px;
+            }
+
+            #actions_button_container {
+                margin: -150px 15px 0 0;
+                width: 142.5px; 
+                float: right;
+                padding-top: 30px;
+            }
+
+            #device_function_button_container {
+                margin-top: 140px; 
+                margin-right: 15px; 
+                float: right;
+            }
+
+            #game_instructions {
+                margin: 0 auto;
+                margin-top: 50px;
+                outline: 1px solid #ffffff;
+                color: #ffffff;
+                width: 500px;
+                
+            }
+
+            #game_instructions div {
+                background-color: #1391A8;
+                padding: 5px 0;
+                font-size: large;
+                text-align: center;
+                text-decoration: underline;
+            }
+
+            .button_action { 
+                padding: 25px;
+                background-color: #454140;
+                font-size: large;
+            } 
+
+            .button_action_bg {
+                background-color: #454140; 
+                display: inline-block; 
+                
+            }
+
+            .button_action:active, .button_action:focus {
+                background: rgb(0,0,0);
+                background: linear-gradient(130deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 100%);
+            }
+
+            .button_vert_bg {
+                background-color: #454140; 
+                display: inline-block; 
+                margin-left: 57px;
+            }
+
+            .up {
+                height: 60px; padding: 0 15px;
+            }
+
+            .up:active, .up:focus  { 
+                background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 100%);
+            }
+
+            .down  {
+                height: 60px; padding: 0 15px;
+            }
+
+            .down:active, .down:focus  {
+                background: rgb(0,0,0);
+                background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 100%);
+            }
+
+            .left {
+                width: 60px; padding:  11px 0;
+            }
+
+            .left:active, .left:focus   {
+                background: rgb(0,0,0);
+                background: linear-gradient(-90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 100%);
+            }
+
+            .right { 
+                width: 60px; padding: 11px 0; float: right;
+            }
+
+            .right:active, .right:focus   {
+                background: rgb(0,0,0);
+                background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 100%);
+            }
+
+            .how_to_play {
+                color: #fafafa;
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+        <title>canvas test</title>
+    </head>
+    <body id="html_body">
+        <div id="device_container">
+            <div id="device_shell">
+                <canvas id="device_screen" style="background-color: #030303"></canvas> 
+
+                <div id="directional_buttons_container">
+                    <div class='button_vert_bg'>
+                        <button id="btn_w" onmousedown="buttonDown('w')" onmouseup="buttonUp('w')" class="button_directional up">
+                            ▲
+                        </button>
+                    </div>
+
+                    <div style="width: 100%; background-color: #454140;">
+                        <button id="btn_a" onmousedown="buttonDown('a')" onmouseup="buttonUp('a')" class="button_directional left">
+                            ◀
+                        </button>
+                        <button id="btn_d" onmousedown="buttonDown('d')" onmouseup="buttonUp('d')" class="button_directional right">
+                            ▶
+                        </button>
+                    </div>
+
+                    <div class='button_vert_bg'>
+                        <button id="btn_s" onmousedown="buttonDown('s')" onmouseup="buttonUp('s')" class="button_directional down">
+                            ▼
+                        </button>
+                    </div>
+                </div>
+
+                <div id="actions_button_container">
+                    <div class='button_action_bg'>
+                        <button id="btn_n" onmousedown="buttonDown('n')" onmouseup="buttonUp('n')" class="button_action">
+                            N
+                        </button>
+                    </div>
+                    <div class='button_action_bg'>
+                        <button id="btn_m" onmousedown="buttonDown('m')" onmouseup="buttonUp('m')" class="button_action">
+                            M
+                        </button>
+                    </div>    
+                </div>  
+
+                <div id="device_function_button_container">
+                    <div class='button_action_bg'>
+                        <button id="btn_power" onclick="togglePower()" class="button_action">
+                            PWR
+                        </button>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <p class="how_to_play">SCORE: <span id="score_display">0</span></p>
+
+        <br />
+
+        <h2 class="how_to_play">How to play</h2>
+        <p class="how_to_play">PWR toggles power</p>
+        <p class="how_to_play">Shoot the asteroids (red)</p>
+        <p class="how_to_play">1 collision with player (green) = game over</p>
+        <script src='./index.js'></script>
+    </body>
+</html>
